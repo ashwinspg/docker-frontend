@@ -7,3 +7,17 @@ before_install:
     - docker build -t ashwinspg/docker-frontend -f Dockerfile.dev . 
 script:
     - docker run -e CI=true ashwinspg/docker-frontend npm run test -- --coverage
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "docker-frontend"
+    env: "DockerFrontend-env"
+    bucket_name: "elasticbeanstalk-us-east-2-132798151495"
+    bucket_path: "docker-frontend"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: "$AWS_SECRET_KEY"
+      
