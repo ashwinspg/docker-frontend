@@ -6,7 +6,7 @@ services:
 before_install:
     - docker build -t ashwinspg/docker-frontend -f Dockerfile.dev . 
 script:
-    - docker run -e CI=true ashwinspg/docker-frontend npm run test -- --coverage
+    - docker run -e CI=true ashwinspg/docker-frontend npm run test
 
 deploy:
     provider: elasticbeanstalk
